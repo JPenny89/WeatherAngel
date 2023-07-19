@@ -68,7 +68,7 @@ struct ContentView: View {
                     .padding(.vertical, 10)
                 }
             }
-            .navigationBarTitle("7-Day Forecast", displayMode: .automatic)
+            .navigationBarTitle("\(weatherVM.city) 7-Day Forecast", displayMode: .automatic)
         }
             .onAppear {
                 self.weatherVM.returnLondon()
