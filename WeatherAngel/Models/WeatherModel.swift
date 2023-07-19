@@ -23,6 +23,7 @@ struct ForecastList: Codable {
 struct ForecastDate: Codable {
 
     var date: String?
+    var date_epoch: Int?
     var day: ConditionDay
 }
 
