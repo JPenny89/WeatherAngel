@@ -14,13 +14,6 @@ class WeatherViewModel: ObservableObject {
     
     @Published var forecastResponse = ForecastResponse.init(location: Location(), current: CurrentDay(), forecast: ForecastList(forecastday: []))
     
-    
-//    @Published var forecastResponse = ForecastResponse.init(location: Location(), current: CurrentDay(), forecast: ForecastList(forecastday: [ForecastDate(day: ConditionDay(condition: ConditionList()))]))
-//    @Published var forecastResponse = ForecastResponse.init(current: CurrentDay(), forecast: ForecastList())
-//    @Published var forecastResponse = ForecastResponse(current: CurrentDay(), forecast: ForecastList(forecastday: [ForecastDate(day: ConditionDay(condition: ConditionList()))]))
-//    @Published var forecastResponse = ForecastResponse.init(current: CurrentDay(), forecast: ForecastList())
-//    var weatherDate: Int = 0
-    
     init() {
         self.weatherAPI = WeatherAPI()
     }
@@ -149,38 +142,17 @@ class WeatherViewModel: ObservableObject {
     
     /// Search for city
     public func search(searchText: String) {
-        /// You need to add the 'addingPercentEncoding' property so you can search for cities
-        /// with space between words, otherwise it will only work on single word cities.
-//        if let city = self.cityName.addingPercentEncoding(withAllowedCharacters: .alphanumerics) {
-//            fetchWeather(by: city, byCoordinates: false, lat: 0.0, long: 0.0)
-//        }
         
         if let city = searchText.addingPercentEncoding(withAllowedCharacters: .alphanumerics) {
             getForecast(by: city)
         }
     }
     
-
-//    public func search(cityName: String) {
-//        /// You need to add the 'addingPercentEncoding' property so you can search for cities
-//        /// with space between words, otherwise it will only work on single word cities.
-//        print(cityName)
-//        if let city = cityName.addingPercentEncoding(withAllowedCharacters: .alphanumerics) {
-//            getForecast(by: city)
-//        }
-//    }
-    
     public func returnLondon() {
-        /// You need to add the 'addingPercentEncoding' property so you can search for cities
-        /// with space between words, otherwise it will only work on single word cities.
-//        if let city = self.cityName.addingPercentEncoding(withAllowedCharacters: .alphanumerics) {
-//            fetchWeather(by: city, byCoordinates: false, lat: 0.0, long: 0.0)
-//        }
         
         let city: String = "London"
             
             getForecast(by: city)
-        
     }
     
     

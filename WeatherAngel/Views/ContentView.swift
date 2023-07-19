@@ -7,18 +7,12 @@
 
 import SwiftUI
 
-//let screen = UIScreen.main.bounds
-
 struct ContentView: View {
     
-//    @ObservedObject var weatherAPI = WeatherAPI()
     @ObservedObject var weatherVM = WeatherViewModel()
     
     @State var searchField = ""
-//    @State var city = ""
-    
-//    var initialCity: String = "London"
-    
+
     var body: some View {
         VStack {
             
@@ -27,7 +21,6 @@ struct ContentView: View {
             HStack {
                 TextField("Enter City", text: self.$searchField) {
                     self.weatherVM.search(searchText: self.searchField)
-                    //                                self.temperaturaVM.cityName = ""
                 }
                 .padding()
                 
@@ -51,7 +44,6 @@ struct ContentView: View {
                     HStack {
                         VStack(alignment: .leading) {
                             //                            Text("\(forecast.date ?? "")")
-//                            Text("\(self.weatherVM.city)")
                             Text("\(self.weatherVM.dateFormatter(timeStamp: forecast.date_epoch!))")
                                 .font(.system(size: 17.0, weight: .semibold))
                             Spacer()
@@ -68,7 +60,6 @@ struct ContentView: View {
                                 
                                 Spacer()
                                 
-                                
                                 Text("\(self.weatherVM.formatDouble(temp: forecast.day.avgtemp_c!))°C")
                                 .bold()
 //                            }
@@ -77,14 +68,8 @@ struct ContentView: View {
                     .padding(.vertical, 10)
                 }
             }
-//            .navigationBarTitle("\(self.weatherVM.city)",
-//                                displayMode: .large)
-//            .navigationBarTitle("7-Day Forecast",
-//                                displayMode: .large)
             .navigationBarTitle("7-Day Forecast", displayMode: .automatic)
-            
         }
-           
             .onAppear {
                 self.weatherVM.returnLondon()
             }

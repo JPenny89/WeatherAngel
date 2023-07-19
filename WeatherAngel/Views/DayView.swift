@@ -41,8 +41,6 @@ struct DayView: View {
                 .padding(.horizontal, 15)
             }
             
-//            Spacer()
-            
             VStack (alignment: .center) {
                 
                     Image("\(self.conditionImage)")
@@ -50,8 +48,6 @@ struct DayView: View {
                         .frame(width: 150, height: 150)
                         .aspectRatio(contentMode: .fit)
                         .padding(.trailing, 32)
-                
-//                Divider()
                 
                     Text("\(self.temp)°C")
                     .font(.system(size: 80.0, weight: .bold))

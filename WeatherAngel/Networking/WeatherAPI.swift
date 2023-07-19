@@ -9,10 +9,10 @@ import Foundation
 
 class WeatherAPI {
     
-//    @Published var forecastResponse = ForecastResponse(current: CurrentDay(), forecast: ForecastList(forecastday: [ForecastDate(day: ConditionDay(condition: ConditionList()))]))
-
     func getWeather(city: String, completion: @escaping(ForecastResponse?) -> ()) {
+        
 //        if let url = URL(string: "https://api.weatherapi.com/v1/current.json?key=cf95275d744a4ae2997124625231407&q=London&aqi=no") {
+        
         guard let url = URL(string: "https://api.weatherapi.com/v1/forecast.json?key=cf95275d744a4ae2997124625231407&q=\(city)&days=7&aqi=no&alerts=no") else {
             completion(nil)
             return
