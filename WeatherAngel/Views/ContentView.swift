@@ -45,7 +45,7 @@ struct ContentView: View {
             NavigationView {
             List(self.weatherVM.forecastResponse.forecast.forecastday, id: \.date_epoch) { forecast in
                 /// Navigate to the forecast details screen for more details.
-                NavigationLink(destination: DayView(city: self.weatherVM.city, date: self.weatherVM.dateFormatter(timeStamp: forecast.date_epoch!), conditionDescription: forecast.day.condition.text ?? "", conditionImage: self.weatherVM.getWeatherIcon(icon_name: forecast.day.condition.code!)))
+                NavigationLink(destination: DayView(city: self.weatherVM.city, date: self.weatherVM.dateFormatter(timeStamp: forecast.date_epoch!), conditionDescription: forecast.day.condition.text ?? "", conditionImage: self.weatherVM.getWeatherIcon(icon_name: forecast.day.condition.code!), temp: self.weatherVM.formatDouble(temp: forecast.day.avgtemp_c!)))
                 {
                     HStack {
                         VStack(alignment: .leading) {
@@ -62,7 +62,7 @@ struct ContentView: View {
                                     .resizable()
                                     .frame(width: 50, height: 50)
                                     .aspectRatio(contentMode: .fit)
-//                                Text("\(forecast.day.condition.icon ?? "")")
+                                Text("\(self.weatherVM.formatDouble(temp: forecast.day.avgtemp_c!))°C")
                             }
                         }
                     }

@@ -39,6 +39,10 @@ class WeatherViewModel: ObservableObject {
         return ""
     }
     
+    public func formatDouble(temp: Double) -> String {
+        return String(format: "%.1f", temp)
+    }
+    
     /// Get the weather condition icon.
     public func getWeatherIcon(icon_name: Int) -> Int {
         switch icon_name {

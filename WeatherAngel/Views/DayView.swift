@@ -16,6 +16,8 @@ struct DayView: View {
     var conditionDescription: String = ""
 //    var conditionImage: String = ""
     var conditionImage: Int = 0
+//    var temp: Double = 0.0
+    var temp: String = ""
     
     // Not sure if the below is right
 //    var forecast = ForecastList(forecastday: [])
@@ -27,6 +29,7 @@ struct DayView: View {
             Text("\(self.date)")
             Text("\(self.conditionDescription)")
             Image("\(self.conditionImage)")
+            Text("Average: \(self.temp)°C")
         }
     }
 }

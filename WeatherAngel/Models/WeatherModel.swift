@@ -33,6 +33,7 @@ struct ForecastDate: Codable {
 }
 
 struct ConditionDay: Codable {
+    var avgtemp_c: Double?
     var condition: ConditionList
 }
 
