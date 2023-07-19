@@ -36,15 +36,16 @@ struct ContentView: View {
                 }
                 .padding(.trailing)
             }
-            .background(Color.white.opacity(0.30))
+            .background(Color.gray.opacity(0.05))
             .clipShape(RoundedRectangle(cornerRadius: 10))
+//            .border(Color.brown)
         
             
             //MARK: - Navigation View
             
             NavigationView {
             List(self.weatherVM.forecastResponse.forecast.forecastday, id: \.date_epoch) { forecast in
-                /// Navigate to the forecast details screen for more details.
+                
                 NavigationLink(destination: DayView(city: self.weatherVM.city, date: self.weatherVM.dateFormatter(timeStamp: forecast.date_epoch!), conditionDescription: forecast.day.condition.text ?? "", conditionImage: self.weatherVM.getWeatherIcon(icon_name: forecast.day.condition.code!), temp: self.weatherVM.formatDouble(temp: forecast.day.avgtemp_c!)))
                 {
                     HStack {
@@ -52,23 +53,36 @@ struct ContentView: View {
                             //                            Text("\(forecast.date ?? "")")
 //                            Text("\(self.weatherVM.city)")
                             Text("\(self.weatherVM.dateFormatter(timeStamp: forecast.date_epoch!))")
-                            Text("\(forecast.day.condition.text ?? "")")
+                                .font(.system(size: 17.0, weight: .semibold))
+                            Spacer()
+                            Text("\(forecast.day.condition.text ?? "")").foregroundColor(Color.blue)
                         }
                         Spacer()
                         VStack(alignment: .trailing) {
-                            HStack{
+//                            HStack{
 //                                Image("113")
                                 Image("\(self.weatherVM.getWeatherIcon(icon_name: forecast.day.condition.code!))")
                                     .resizable()
                                     .frame(width: 50, height: 50)
                                     .aspectRatio(contentMode: .fit)
+                                
+                                Spacer()
+                                
+                                
                                 Text("\(self.weatherVM.formatDouble(temp: forecast.day.avgtemp_c!))°C")
-                            }
+                                .bold()
+//                            }
                         }
                     }
                     .padding(.vertical, 10)
                 }
             }
+//            .navigationBarTitle("\(self.weatherVM.city)",
+//                                displayMode: .large)
+//            .navigationBarTitle("7-Day Forecast",
+//                                displayMode: .large)
+            .navigationBarTitle("7-Day Forecast", displayMode: .automatic)
+            
         }
            
             .onAppear {

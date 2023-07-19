@@ -24,12 +24,43 @@ struct DayView: View {
     
     var body: some View {
         VStack {
-            Text("\(self.city)")
-//            Text("\(self.weatherVM.dateFormatter(timeStamp: forecast.date_epoch!))")
-            Text("\(self.date)")
-            Text("\(self.conditionDescription)")
-            Image("\(self.conditionImage)")
-            Text("Average: \(self.temp)°C")
+            HStack {
+                Spacer()
+                
+                Spacer()
+                
+                VStack (alignment: .trailing) {
+                    Text("\(self.conditionDescription)")
+                        .font(.system(size: 30.0, weight: .bold))
+                        .bold()
+                    Text("\(self.city)")
+                        .font(.system(size: 20.0, weight: .semibold))
+                    Text("\(self.date)")
+                        .font(.system(size: 15.0))
+                }
+                .padding(.horizontal, 15)
+            }
+            
+//            Spacer()
+            
+            VStack (alignment: .center) {
+                
+                    Image("\(self.conditionImage)")
+                        .resizable()
+                        .frame(width: 150, height: 150)
+                        .aspectRatio(contentMode: .fit)
+                        .padding(.trailing, 32)
+                
+//                Divider()
+                
+                    Text("\(self.temp)°C")
+                    .font(.system(size: 80.0, weight: .bold))
+                    .bold()
+                
+            }
+            .padding(.horizontal, 15)
+   Spacer()
+            
         }
     }
 }
