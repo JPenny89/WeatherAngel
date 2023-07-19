@@ -8,8 +8,26 @@
 import SwiftUI
 
 struct DayView: View {
+    @ObservedObject var weatherVM = WeatherViewModel()
+    
+    
+    var city: String = ""
+    var date: String = ""
+    var conditionDescription: String = ""
+//    var conditionImage: String = ""
+    var conditionImage: Int = 0
+    
+    // Not sure if the below is right
+//    var forecast = ForecastList(forecastday: [])
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text("\(self.city)")
+//            Text("\(self.weatherVM.dateFormatter(timeStamp: forecast.date_epoch!))")
+            Text("\(self.date)")
+            Text("\(self.conditionDescription)")
+            Image("\(self.conditionImage)")
+        }
     }
 }
 

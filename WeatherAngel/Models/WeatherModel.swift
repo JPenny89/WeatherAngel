@@ -8,8 +8,13 @@
 import Foundation
 
 struct ForecastResponse: Codable {
+    var location: Location
     var current: CurrentDay
     var forecast: ForecastList
+}
+
+struct Location: Codable {
+    var name: String?
 }
 
 struct CurrentDay: Codable {
@@ -34,6 +39,7 @@ struct ConditionDay: Codable {
 struct ConditionList: Codable {
     var text: String?
     var icon: String?
+    var code: Int?
 }
 
 

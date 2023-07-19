@@ -7,12 +7,17 @@
 
 import SwiftUI
 
+//let screen = UIScreen.main.bounds
+
 struct ContentView: View {
     
 //    @ObservedObject var weatherAPI = WeatherAPI()
     @ObservedObject var weatherVM = WeatherViewModel()
     
     @State var searchField = ""
+//    @State var city = ""
+    
+//    var initialCity: String = "London"
     
     var body: some View {
         VStack {
@@ -20,9 +25,9 @@ struct ContentView: View {
             //MARK: - Search Field
             
             HStack {
-                TextField("Enter city name", text: self.$searchField) {
+                TextField("Enter City", text: self.$searchField) {
                     self.weatherVM.search(searchText: self.searchField)
-//                                self.temperaturaVM.cityName = ""
+                    //                                self.temperaturaVM.cityName = ""
                 }
                 .padding()
                 
@@ -33,68 +38,52 @@ struct ContentView: View {
             }
             .background(Color.white.opacity(0.30))
             .clipShape(RoundedRectangle(cornerRadius: 10))
+        
             
-      //MARK: - Button
+            //MARK: - Navigation View
             
-//            Button(action: weatherAPI.getWeather) {
-//                Text("Find Exercise")
-//                    .padding()
-//                    .overlay(
-//                        RoundedRectangle(cornerRadius: 50)
-//                            .stroke(Color.black, lineWidth: 2)
-//                    )
-//            }
-//            .font(.title2)
-//            .foregroundColor(Color.white)
-            
-        //MARK: - List
-            
-//            List(self.weatherAPI.forecastResponse.forecast.forecastday, id: \.date_epoch) { forecast in
-//                /// Navigate to the forecast details screen for more details.
-//                NavigationLink(destination: DayView())
-//                {
-//                    HStack {
-//                        VStack(alignment: .leading) {
-//                            //                        Text("\(forecast.date)")
-////                            Text(forecast.day.condition.text!)
-//                            //                        Text("\(self.forecastVM.dateFormatter(timeStamp: forecast.dt!))").font(.footnote)
-//                            //                        Text("\(self.forecastVM.getTime(timeStamp: forecast.dt!))")
-//                            //                            .font(.footnote)
-//                            //                            .foregroundColor(Color.secondary)
-//                            //                        Text("\(self.forecastVM.city), \(self.country_code)")
-//                            //                            .font(.footnote).foregroundColor(Color.gray)
-//                            //                        Text("\(forecast.weather?[0].description ?? "")".capitalized)
-//                            //                            .font(.caption)
-//                            //                            .bold()
-//                            //                            .foregroundColor(Color.blue)
-//                            //                            .padding(.top, 20)
-//                        }
-//                        //                    Spacer()
-//                        //                    VStack(alignment: .trailing) {
-//                        //                        HStack {
-//                        //                            Image("\(self.forecastVM.getWeatherIcon(icon_name: (forecast.weather?[0].icon)!))")
-//                        //                                .resizable()
-//                        //                                .frame(width: 50, height: 50)
-//                        //                                .aspectRatio(contentMode: .fit)
-//                        //                            Text("\(self.forecastVM.formatDouble(temp: (forecast.main?.temp) ?? 0.0))°C")
-//                        //                        }
-//                        //                    }
-//                    }
-//
-//                }
-//            }
-            
-            
-//            .onAppear {
-//                self.weatherAPI.getWeather()
-//                print("uv = \(String(describing: weatherAPI.forecastResponse.current.uv))")
-//            }
+            NavigationView {
+            List(self.weatherVM.forecastResponse.forecast.forecastday, id: \.date_epoch) { forecast in
+                /// Navigate to the forecast details screen for more details.
+                NavigationLink(destination: DayView(city: self.weatherVM.city, date: self.weatherVM.dateFormatter(timeStamp: forecast.date_epoch!), conditionDescription: forecast.day.condition.text ?? "", conditionImage: self.weatherVM.getWeatherIcon(icon_name: forecast.day.condition.code!)))
+                {
+                    HStack {
+                        VStack(alignment: .leading) {
+                            //                            Text("\(forecast.date ?? "")")
+//                            Text("\(self.weatherVM.city)")
+                            Text("\(self.weatherVM.dateFormatter(timeStamp: forecast.date_epoch!))")
+                            Text("\(forecast.day.condition.text ?? "")")
+                        }
+                        Spacer()
+                        VStack(alignment: .trailing) {
+                            HStack{
+//                                Image("113")
+                                Image("\(self.weatherVM.getWeatherIcon(icon_name: forecast.day.condition.code!))")
+                                    .resizable()
+                                    .frame(width: 50, height: 50)
+                                    .aspectRatio(contentMode: .fit)
+//                                Text("\(forecast.day.condition.icon ?? "")")
+                            }
+                        }
+                    }
+                    .padding(.vertical, 10)
+                }
+            }
         }
+           
+            .onAppear {
+                self.weatherVM.returnLondon()
+            }
+        }
+      
     }
+        
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
+            .previewDisplayName("iPhone 14")
     }
 }
