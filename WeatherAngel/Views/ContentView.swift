@@ -50,7 +50,10 @@ struct ContentView: View {
                         VStack(alignment: .leading) {
                             //                            Text("\(forecast.date ?? "")")
                             Text("\(self.weatherVM.dateFormatter(timeStamp: forecast.date_epoch!))")
-                                .font(.system(size: 17.0, weight: .semibold))
+//                                .font(.system(size: 17.0, weight: .semibold))
+                                .font(.body)
+                                .bold()
+                                .italic()
                                 .accessibilityHidden(true)
                             Spacer()
                             Text("\(forecast.day.condition.text ?? "")")
