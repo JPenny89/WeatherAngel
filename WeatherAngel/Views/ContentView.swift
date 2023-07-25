@@ -41,25 +41,65 @@ struct ContentView: View {
             NavigationView {
             List(self.weatherVM.forecastResponse.forecast.forecastday, id: \.date_epoch) { forecast in
                 
-                NavigationLink(destination: DayView(city: self.weatherVM.city, date: self.weatherVM.dateFormatter(timeStamp: forecast.date_epoch!), conditionDescription: forecast.day.condition.text ?? "", conditionImage: self.weatherVM.getWeatherIcon(icon_name: forecast.day.condition.code!), temp: self.weatherVM.formatDouble(temp: forecast.day.avgtemp_c!)))
+                NavigationLink(destination: DayView(city: self.weatherVM.city, date: self.weatherVM.dateFormatterFull(timeStamp: forecast.date_epoch!), conditionDescription: forecast.day.condition.text ?? "", conditionImage: self.weatherVM.getWeatherIcon(icon_name: forecast.day.condition.code!), temp: self.weatherVM.formatDouble(temp: forecast.day.avgtemp_c!)))
                     
                 {
                     
                     HStack {
-                      
-                        VStack(alignment: .leading) {
-                            //                            Text("\(forecast.date ?? "")")
-                            Text("\(self.weatherVM.dateFormatter(timeStamp: forecast.date_epoch!))")
-//                                .font(.system(size: 17.0, weight: .semibold))
-                                .font(.body)
-                                .bold()
-                                .italic()
-                                .accessibilityHidden(true)
-                            Spacer()
-                            Text("\(forecast.day.condition.text ?? "")")
-                                .foregroundColor(Color.black)
-                                .accessibilityHidden(true)
+                        
+                        if dynamicTypeSize.isAccessibilitySize {
+                            VStack(alignment: .leading) {
+                                Text("\(self.weatherVM.dateFormatterShort(timeStamp: forecast.date_epoch!))")
+    //                                .font(.system(size: 17.0, weight: .semibold))
+                                    .font(.body)
+                                    .bold()
+                                    .italic()
+                                    .accessibilityHidden(true)
+                                Spacer()
+                                Text("Test Condition")
+                                    .foregroundColor(Color.black)
+                                    .accessibilityHidden(true)
+                            }
+                        } else {
+                            VStack(alignment: .leading) {
+                                //                            Text("\(forecast.date ?? "")")
+                                Text("\(self.weatherVM.dateFormatterFull(timeStamp: forecast.date_epoch!))")
+    //                                .font(.system(size: 17.0, weight: .semibold))
+                                    .font(.body)
+                                    .bold()
+                                    .italic()
+                                    .accessibilityHidden(true)
+                                Spacer()
+                                Text("\(forecast.day.condition.text ?? "")")
+                                    .foregroundColor(Color.black)
+                                    .accessibilityHidden(true)
+                            }
                         }
+                        
+                        
+                        
+                        
+                        
+                      
+//                        VStack(alignment: .leading) {
+//                            //                            Text("\(forecast.date ?? "")")
+//                            Text("\(self.weatherVM.dateFormatter(timeStamp: forecast.date_epoch!))")
+////                                .font(.system(size: 17.0, weight: .semibold))
+//                                .font(.body)
+//                                .bold()
+//                                .italic()
+//                                .accessibilityHidden(true)
+//                            Spacer()
+//                            Text("\(forecast.day.condition.text ?? "")")
+//                                .foregroundColor(Color.black)
+//                                .accessibilityHidden(true)
+//                        }
+                        
+                        
+                        
+                        
+                        
+                        
                         Spacer()
                         VStack(alignment: .trailing) {
 //                            HStack{
@@ -74,7 +114,7 @@ struct ContentView: View {
                                 Text("\(self.weatherVM.formatDouble(temp: forecast.day.avgtemp_c!))°C")
                                 .bold()
                         }
-                        .accessibilityLabel(Text("\(forecast.day.condition.text ?? "") on \(self.weatherVM.dateFormatter(timeStamp: forecast.date_epoch!)), with an average temperature of \(self.weatherVM.formatDouble(temp: forecast.day.avgtemp_c!))°C"))
+                        .accessibilityLabel(Text("\(forecast.day.condition.text ?? "") on \(self.weatherVM.dateFormatterFull(timeStamp: forecast.date_epoch!)), with an average temperature of \(self.weatherVM.formatDouble(temp: forecast.day.avgtemp_c!))°C"))
                     }
                     .padding(.vertical, 10)
                     

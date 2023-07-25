@@ -18,9 +18,16 @@ class WeatherViewModel: ObservableObject {
     }
     
     /// Format the date properly (e.g. Monday, May 11, 2020)
-    public func dateFormatter(timeStamp: Int) -> String {
+    public func dateFormatterFull(timeStamp: Int) -> String {
         let formatter = DateFormatter()
         formatter.dateStyle = .full
+        return formatter.string(from: Date(timeIntervalSince1970: TimeInterval(timeStamp)))
+    }
+    
+    public func dateFormatterShort(timeStamp: Int) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.locale = Locale(identifier: "uk")
         return formatter.string(from: Date(timeIntervalSince1970: TimeInterval(timeStamp)))
     }
     
