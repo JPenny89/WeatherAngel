@@ -6,7 +6,6 @@
 //
 
 import Foundation
-//import Combine
 
 class WeatherViewModel: ObservableObject {
     
@@ -138,7 +137,7 @@ class WeatherViewModel: ObservableObject {
         }
     }
     
-
+    
     
     /// Search for city
     public func search(searchText: String) {
@@ -151,8 +150,8 @@ class WeatherViewModel: ObservableObject {
     public func returnLondon() {
         
         let city: String = "London"
-            
-            getForecast(by: city)
+        
+        getForecast(by: city)
     }
     
     
@@ -166,6 +165,4 @@ class WeatherViewModel: ObservableObject {
             }
         }
     }
-    
-
 }

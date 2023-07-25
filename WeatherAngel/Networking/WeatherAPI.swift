@@ -11,8 +11,6 @@ class WeatherAPI {
     
     func getWeather(city: String, completion: @escaping(ForecastResponse?) -> ()) {
         
-//        if let url = URL(string: "https://api.weatherapi.com/v1/current.json?key=cf95275d744a4ae2997124625231407&q=London&aqi=no") {
-        
         guard let url = URL(string: "https://api.weatherapi.com/v1/forecast.json?key=cf95275d744a4ae2997124625231407&q=\(city)&days=7&aqi=no&alerts=no") else {
             completion(nil)
             return
@@ -31,7 +29,7 @@ class WeatherAPI {
                 
                 print("API call worked")
                 print("forecastData = \(forecastData)")
-
+                
             } else {
                 print("Something went wrong during API call")
                 completion(nil)

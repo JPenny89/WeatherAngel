@@ -8,19 +8,12 @@
 import SwiftUI
 
 struct DayView: View {
-    @ObservedObject var weatherVM = WeatherViewModel()
-    
     
     var city: String = ""
     var date: String = ""
     var conditionDescription: String = ""
-//    var conditionImage: String = ""
     var conditionImage: Int = 0
-//    var temp: Double = 0.0
     var temp: String = ""
-    
-    // Not sure if the below is right
-//    var forecast = ForecastList(forecastday: [])
     
     var body: some View {
         VStack {
@@ -33,6 +26,9 @@ struct DayView: View {
                     Text("\(self.conditionDescription)")
                         .font(.system(size: 30.0, weight: .bold))
                         .bold()
+                    
+                    //                Accessibility Label
+                        .accessibilityLabel(Text("The foreccast for today is \(self.conditionDescription)"))
                     Text("\(self.city)")
                         .font(.system(size: 20.0, weight: .semibold))
                     Text("\(self.date)")
@@ -43,19 +39,24 @@ struct DayView: View {
             
             VStack (alignment: .center) {
                 
-                    Image("\(self.conditionImage)")
-                        .resizable()
-                        .frame(width: 150, height: 150)
-                        .aspectRatio(contentMode: .fit)
-                        .padding(.trailing, 32)
+                Image("\(self.conditionImage)")
+                    .resizable()
+                    .frame(width: 150, height: 150)
+                    .aspectRatio(contentMode: .fit)
+                    .padding(.trailing, 32)
                 
-                    Text("\(self.temp)°C")
+                //                Accessibility Label
+                    .accessibilityLabel(Text("\(self.conditionDescription)"))
+                
+                Text("\(self.temp)°C")
                     .font(.system(size: 80.0, weight: .bold))
                     .bold()
                 
+                //                Accessibility Label
+                    .accessibilityLabel(Text("Today's average temperature in \(self.city) is \(self.temp)°C"))
             }
             .padding(.horizontal, 15)
-   Spacer()
+            Spacer()
             
         }
     }

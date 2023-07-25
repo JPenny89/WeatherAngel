@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.dynamicTypeSize) var dynamicTypeSize
     
     @ObservedObject var weatherVM = WeatherViewModel()
     
@@ -41,14 +42,20 @@ struct ContentView: View {
             List(self.weatherVM.forecastResponse.forecast.forecastday, id: \.date_epoch) { forecast in
                 
                 NavigationLink(destination: DayView(city: self.weatherVM.city, date: self.weatherVM.dateFormatter(timeStamp: forecast.date_epoch!), conditionDescription: forecast.day.condition.text ?? "", conditionImage: self.weatherVM.getWeatherIcon(icon_name: forecast.day.condition.code!), temp: self.weatherVM.formatDouble(temp: forecast.day.avgtemp_c!)))
+                    
                 {
+                    
                     HStack {
+                      
                         VStack(alignment: .leading) {
                             //                            Text("\(forecast.date ?? "")")
                             Text("\(self.weatherVM.dateFormatter(timeStamp: forecast.date_epoch!))")
                                 .font(.system(size: 17.0, weight: .semibold))
+                                .accessibilityHidden(true)
                             Spacer()
-                            Text("\(forecast.day.condition.text ?? "")").foregroundColor(Color.blue)
+                            Text("\(forecast.day.condition.text ?? "")")
+                                .foregroundColor(Color.black)
+                                .accessibilityHidden(true)
                         }
                         Spacer()
                         VStack(alignment: .trailing) {
@@ -63,13 +70,17 @@ struct ContentView: View {
                                 
                                 Text("\(self.weatherVM.formatDouble(temp: forecast.day.avgtemp_c!))°C")
                                 .bold()
-//                            }
                         }
+                        .accessibilityLabel(Text("\(forecast.day.condition.text ?? "") on \(self.weatherVM.dateFormatter(timeStamp: forecast.date_epoch!)), with an average temperature of \(self.weatherVM.formatDouble(temp: forecast.day.avgtemp_c!))°C"))
                     }
                     .padding(.vertical, 10)
+                    
+                    
                 }
+                
             }
             .navigationBarTitle("\(weatherVM.city) 7-Day Forecast", displayMode: .inline)
+
         }
             .onAppear {
                 self.weatherVM.returnLondon()
