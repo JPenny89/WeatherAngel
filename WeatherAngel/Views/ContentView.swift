@@ -42,36 +42,38 @@ struct ContentView: View {
                     
                     NavigationLink(destination: DayView(city: self.weatherVM.city, dateLong: self.weatherVM.dateFormatterFull(timeStamp: forecast.date_epoch!), dateShort: self.weatherVM.dateFormatterShort(timeStamp: forecast.date_epoch!), conditionDescription: forecast.day.condition.text ?? "", conditionImage: self.weatherVM.getWeatherIcon(icon_name: forecast.day.condition.code!), temp: self.weatherVM.formatDouble(temp: forecast.day.avgtemp_c!))) {
                         
-                        //                    ACCESSIBILITY
-                        
                         if dynamicTypeSize.isAccessibilitySize {
                             VStack(alignment: .leading) {
                                 Text("\(self.weatherVM.dateFormatterShort(timeStamp: forecast.date_epoch!))")
                                     .font(.body)
                                     .bold()
                                     .italic()
-                                //                    ACCESSIBILITY
+                                
                                     .accessibilityHidden(true)
                                 
                                 Spacer()
                                 
                                 Text("\(forecast.day.condition.text ?? "")")
                                     .foregroundColor(Color.black)
-                                //                    ACCESSIBILITY
+                                
                                     .accessibilityHidden(true)
                                 
                                 Spacer()
                                 
                                 Image("\(self.weatherVM.getWeatherIcon(icon_name: forecast.day.condition.code!))")
                                     .resizable()
-                                //                    ACCESSIBILITY
+                                
                                     .frame(width: 50, height: 50)
                                     .aspectRatio(contentMode: .fit)
+                                
+                                    .accessibilityHidden(true)
                                 
                                 Spacer()
                                 
                                 Text("\(self.weatherVM.formatDouble(temp: forecast.day.avgtemp_c!))°C")
                                     .bold()
+                                
+                                    .accessibilityHidden(true)
                             }
                             
                         } else {
@@ -82,14 +84,14 @@ struct ContentView: View {
                                         .font(.body)
                                         .bold()
                                         .italic()
-                                    //                    ACCESSIBILITY
+                                    
                                         .accessibilityHidden(true)
                                     
                                     Spacer()
                                     
                                     Text("\(forecast.day.condition.text ?? "")")
                                         .foregroundColor(Color.black)
-                                    //                    ACCESSIBILITY
+                                    
                                         .accessibilityHidden(true)
                                     
                                     Spacer()
@@ -102,14 +104,14 @@ struct ContentView: View {
                                     Image("\(self.weatherVM.getWeatherIcon(icon_name: forecast.day.condition.code!))")
                                         .frame(width: 50, height: 50)
                                         .aspectRatio(contentMode: .fit)
-                                    //                    ACCESSIBILITY
+                                    
                                         .accessibilityHidden(true)
                                     
                                     Spacer()
                                     
                                     Text("\(self.weatherVM.formatDouble(temp: forecast.day.avgtemp_c!))°C")
                                         .bold()
-                                    //                    ACCESSIBILITY
+                                    
                                         .accessibilityHidden(true)
                                 }
                             }
@@ -117,7 +119,6 @@ struct ContentView: View {
                         }
                     }
                     
-                    //                    ACCESSIBILITY
                     .accessibilityLabel(Text("\(forecast.day.condition.text ?? "") in \(self.weatherVM.city) on \(self.weatherVM.dateFormatterFull(timeStamp: forecast.date_epoch!)), with an average temperature of \(self.weatherVM.formatDouble(temp: forecast.day.avgtemp_c!))°C"))
                     
                     .padding(.vertical, 10)
