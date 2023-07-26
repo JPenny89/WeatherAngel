@@ -10,7 +10,8 @@ import SwiftUI
 struct DayView: View {
     
     var city: String = ""
-    var date: String = ""
+    var dateLong: String = ""
+    var dateShort: String = ""
     var conditionDescription: String = ""
     var conditionImage: Int = 0
     var temp: String = ""
@@ -28,47 +29,50 @@ struct DayView: View {
                     // Accessibility change: Removed specified font size
                         .font(.largeTitle)
                         .bold()
+                        .minimumScaleFactor(0.5)
                     
                     //                Accessibility Label
-                        .accessibilityLabel(Text("The foreccast for today is \(self.conditionDescription)"))
+                        .accessibilityLabel(Text("The foreccast in \(self.city) on \(self.dateLong) is \(self.conditionDescription)"))
                     Text("\(self.city)")
                         .font(.title)
-//                        .italic()
-                        
-                     
                     
-                        
-                    Text("\(self.date)")
+                    Text("\(self.dateShort)")
                         .font(.body)
                         .italic()
-                    
+                    //                    Accessibility: Specified how the date should be spoken.
+                        .accessibilityLabel(Text("\(self.dateLong)"))
                 }
                 .padding(.horizontal, 15)
             }
             
+            Divider()
+            
             VStack (alignment: .center) {
-                
                 Image("\(self.conditionImage)")
                     .resizable()
+                //                Accessibility: Maintained image size to avoid screen crowding if text size increases.
                     .frame(width: 150, height: 150)
                     .aspectRatio(contentMode: .fit)
                 
                 //                Accessibility Label
                     .accessibilityLabel(Text("\(self.conditionDescription)"))
                 
+                Divider()
+                
                 Text("\(self.temp)°C")
+                //                Accessibility: Maintained font size of number to avoid screen crowding if text size increases.
                     .font(.system(size: 80.0, weight: .bold))
                     .bold()
                 
                 //                Accessibility Label
                     .accessibilityLabel(Text("Today's average temperature in \(self.city) is \(self.temp)°C"))
                 
-                //                Accessibility Hidden
-
                 Text("Daily Average")
+                //                Accessibility
                     .accessibilityHidden(true)
             }
             .padding(.horizontal, 15)
+            
             Spacer()
             
         }
@@ -78,7 +82,7 @@ struct DayView: View {
 struct DayView_Previews: PreviewProvider {
     static var previews: some View {
         @ObservedObject var weatherVM = WeatherViewModel()
-        DayView(city: "London", date: "2023-07-30", conditionDescription: "Patchy rain possible", conditionImage: 113, temp: "17")
+        DayView(city: "London", dateShort: "2023-07-30", conditionDescription: "Patchy rain possible", conditionImage: 113, temp: "17")
     }
 }
 

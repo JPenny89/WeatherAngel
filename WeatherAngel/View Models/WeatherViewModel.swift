@@ -24,6 +24,8 @@ class WeatherViewModel: ObservableObject {
         return formatter.string(from: Date(timeIntervalSince1970: TimeInterval(timeStamp)))
     }
     
+    //                Accessibility: Created second date formatter to be used when font size is increased.
+    
     public func dateFormatterShort(timeStamp: Int) -> String {
         let formatter = DateFormatter()
         formatter.dateStyle = .short

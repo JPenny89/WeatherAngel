@@ -13,7 +13,7 @@ struct ContentView: View {
     @ObservedObject var weatherVM = WeatherViewModel()
     
     @State var searchField = ""
-
+    
     var body: some View {
         
         VStack {
@@ -33,107 +33,104 @@ struct ContentView: View {
             }
             .background(Color.gray.opacity(0.05))
             .clipShape(RoundedRectangle(cornerRadius: 10))
-//            .border(Color.brown)
-        
+            
             
             //MARK: - Navigation View
             
             NavigationView {
-            List(self.weatherVM.forecastResponse.forecast.forecastday, id: \.date_epoch) { forecast in
-                
-                NavigationLink(destination: DayView(city: self.weatherVM.city, date: self.weatherVM.dateFormatterFull(timeStamp: forecast.date_epoch!), conditionDescription: forecast.day.condition.text ?? "", conditionImage: self.weatherVM.getWeatherIcon(icon_name: forecast.day.condition.code!), temp: self.weatherVM.formatDouble(temp: forecast.day.avgtemp_c!)))
+                List(self.weatherVM.forecastResponse.forecast.forecastday, id: \.date_epoch) { forecast in
                     
-                {
-                    
-                    
-                    if dynamicTypeSize.isAccessibilitySize {
-                        VStack(alignment: .leading) {
-                            Text("\(self.weatherVM.dateFormatterShort(timeStamp: forecast.date_epoch!))")
-//                                .font(.system(size: 17.0, weight: .semibold))
-                                .font(.body)
-                                .bold()
-                                .italic()
-                                .accessibilityHidden(true)
-                            Spacer()
-                            Text("\(forecast.day.condition.text ?? "")")
-                                .foregroundColor(Color.black)
-                                .accessibilityHidden(true)
-                            Spacer()
-                            Image("\(self.weatherVM.getWeatherIcon(icon_name: forecast.day.condition.code!))")
-                                .resizable()
-                                .frame(width: 50, height: 50)
-                                .aspectRatio(contentMode: .fit)
+                    NavigationLink(destination: DayView(city: self.weatherVM.city, dateLong: self.weatherVM.dateFormatterFull(timeStamp: forecast.date_epoch!), dateShort: self.weatherVM.dateFormatterShort(timeStamp: forecast.date_epoch!), conditionDescription: forecast.day.condition.text ?? "", conditionImage: self.weatherVM.getWeatherIcon(icon_name: forecast.day.condition.code!), temp: self.weatherVM.formatDouble(temp: forecast.day.avgtemp_c!))) {
+                        
+                        //                    ACCESSIBILITY
+                        
+                        if dynamicTypeSize.isAccessibilitySize {
+                            VStack(alignment: .leading) {
+                                Text("\(self.weatherVM.dateFormatterShort(timeStamp: forecast.date_epoch!))")
+                                    .font(.body)
+                                    .bold()
+                                    .italic()
+                                //                    ACCESSIBILITY
+                                    .accessibilityHidden(true)
+                                
+                                Spacer()
+                                
+                                Text("\(forecast.day.condition.text ?? "")")
+                                    .foregroundColor(Color.black)
+                                //                    ACCESSIBILITY
+                                    .accessibilityHidden(true)
+                                
+                                Spacer()
+                                
+                                Image("\(self.weatherVM.getWeatherIcon(icon_name: forecast.day.condition.code!))")
+                                    .resizable()
+                                //                    ACCESSIBILITY
+                                    .frame(width: 50, height: 50)
+                                    .aspectRatio(contentMode: .fit)
+                                
+                                Spacer()
+                                
+                                Text("\(self.weatherVM.formatDouble(temp: forecast.day.avgtemp_c!))°C")
+                                    .bold()
+                            }
                             
-                            Spacer()
+                        } else {
                             
-                            Text("\(self.weatherVM.formatDouble(temp: forecast.day.avgtemp_c!))°C")
-                            .bold()
-                        }
-                    } else {
-                        HStack {
-                            
-                           
+                            HStack {
                                 VStack(alignment: .leading) {
-                                    //                            Text("\(forecast.date ?? "")")
                                     Text("\(self.weatherVM.dateFormatterFull(timeStamp: forecast.date_epoch!))")
-        //                                .font(.system(size: 17.0, weight: .semibold))
                                         .font(.body)
                                         .bold()
                                         .italic()
+                                    //                    ACCESSIBILITY
                                         .accessibilityHidden(true)
+                                    
                                     Spacer()
+                                    
                                     Text("\(forecast.day.condition.text ?? "")")
                                         .foregroundColor(Color.black)
+                                    //                    ACCESSIBILITY
                                         .accessibilityHidden(true)
+                                    
                                     Spacer()
                                     
-                                
-          
-                                    
                                 }
-                            Spacer()
-                            
-                            VStack(alignment: .trailing) {
-    //                            HStack{
-    //                                Image("113")
+                                
+                                Spacer()
+                                
+                                VStack(alignment: .trailing) {
                                     Image("\(self.weatherVM.getWeatherIcon(icon_name: forecast.day.condition.code!))")
-//                                        .resizable()
                                         .frame(width: 50, height: 50)
                                         .aspectRatio(contentMode: .fit)
+                                    //                    ACCESSIBILITY
+                                        .accessibilityHidden(true)
                                     
                                     Spacer()
                                     
                                     Text("\(self.weatherVM.formatDouble(temp: forecast.day.avgtemp_c!))°C")
-                                    .bold()
-                            }
+                                        .bold()
+                                    //                    ACCESSIBILITY
+                                        .accessibilityHidden(true)
+                                }
                             }
                             
-                        
+                        }
                     }
                     
+                    //                    ACCESSIBILITY
+                    .accessibilityLabel(Text("\(forecast.day.condition.text ?? "") in \(self.weatherVM.city) on \(self.weatherVM.dateFormatterFull(timeStamp: forecast.date_epoch!)), with an average temperature of \(self.weatherVM.formatDouble(temp: forecast.day.avgtemp_c!))°C"))
                     
-                    
-                    
-                   
-//                        .accessibilityLabel(Text("\(forecast.day.condition.text ?? "") on \(self.weatherVM.dateFormatterFull(timeStamp: forecast.date_epoch!)), with an average temperature of \(self.weatherVM.formatDouble(temp: forecast.day.avgtemp_c!))°C"))
-                    }
                     .padding(.vertical, 10)
-                    
-                    
                 }
-                
+                .navigationBarTitle("\(weatherVM.city) 7-Day Forecast", displayMode: .inline)
             }
-            .navigationBarTitle("\(weatherVM.city) 7-Day Forecast", displayMode: .inline)
-
+            
         }
-            .onAppear {
-                self.weatherVM.returnLondon()
-            }
+        .onAppear {
+            self.weatherVM.returnLondon()
         }
-      
     }
-        
-
+}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
