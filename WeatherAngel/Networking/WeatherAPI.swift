@@ -11,7 +11,7 @@ class WeatherAPI {
     
     func getWeather(city: String, completion: @escaping(ForecastResponse?) -> ()) {
         
-        guard let url = URL(string: "https://api.weatherapi.com/v1/forecast.json?key=cf95275d744a4ae2997124625231407&q=\(city)&days=7&aqi=no&alerts=no") else {
+        guard let url = URL(string: "https://api.weatherapi.com/v1/forecast.json?key=\(Constants.APIKey)&q=\(city)&days=\(Constants.forecastDays)&aqi=no&alerts=no") else {
             completion(nil)
             return
         }

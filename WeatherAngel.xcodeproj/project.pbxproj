@@ -11,6 +11,7 @@
 		631782532A65805000BA2C7E /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631782522A65805000BA2C7E /* WeatherModel.swift */; };
 		631782552A65806100BA2C7E /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631782542A65806100BA2C7E /* WeatherViewModel.swift */; };
 		631782572A65807B00BA2C7E /* WeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631782562A65807B00BA2C7E /* WeatherAPI.swift */; };
+		632D6B1B2A714A1100F4C1D2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632D6B1A2A714A1100F4C1D2 /* Constants.swift */; };
 		63D6F3DB2A687D820085C567 /* WeatherAngelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D6F3DA2A687D820085C567 /* WeatherAngelTests.swift */; };
 		63DA8B642A64397200944743 /* WeatherAngelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DA8B632A64397200944743 /* WeatherAngelApp.swift */; };
 		63DA8B662A64397200944743 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DA8B652A64397200944743 /* ContentView.swift */; };
@@ -33,6 +34,7 @@
 		631782522A65805000BA2C7E /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		631782542A65806100BA2C7E /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
 		631782562A65807B00BA2C7E /* WeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
+		632D6B1A2A714A1100F4C1D2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		63D6F3D82A687D820085C567 /* WeatherAngelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherAngelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		63D6F3DA2A687D820085C567 /* WeatherAngelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAngelTests.swift; sourceTree = "<group>"; };
 		63DA8B602A64397200944743 /* WeatherAngel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherAngel.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				631782522A65805000BA2C7E /* WeatherModel.swift */,
+				632D6B1A2A714A1100F4C1D2 /* Constants.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				631782552A65806100BA2C7E /* WeatherViewModel.swift in Sources */,
 				6317824D2A657F9100BA2C7E /* DayView.swift in Sources */,
 				631782572A65807B00BA2C7E /* WeatherAPI.swift in Sources */,
+				632D6B1B2A714A1100F4C1D2 /* Constants.swift in Sources */,
 				63DA8B642A64397200944743 /* WeatherAngelApp.swift in Sources */,
 				631782532A65805000BA2C7E /* WeatherModel.swift in Sources */,
 			);
