@@ -31,6 +31,7 @@ struct DayView: View {
                         .minimumScaleFactor(0.5)
                     
                         .accessibilityLabel(Text("The foreccast in \(self.city) on \(self.dateLong) is \(self.conditionDescription)"))
+                    
                     Text("\(self.city)")
                         .font(.title)
                     

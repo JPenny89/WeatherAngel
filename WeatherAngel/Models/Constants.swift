@@ -9,5 +9,5 @@ import Foundation
 
 struct Constants {
     static let APIKey = "cf95275d744a4ae2997124625231407"
-    static let forecastDays = "7"
+    static let forecastDays = "3"
 }

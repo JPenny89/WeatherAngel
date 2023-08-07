@@ -54,8 +54,7 @@ struct ContentView: View {
                                 Spacer()
                                 
                                 Text("\(forecast.day.condition.text ?? "")")
-                                    .foregroundColor(Color.black)
-                                
+                                                                   
                                     .accessibilityHidden(true)
                                 
                                 Spacer()
@@ -90,8 +89,6 @@ struct ContentView: View {
                                     Spacer()
                                     
                                     Text("\(forecast.day.condition.text ?? "")")
-                                        .foregroundColor(Color.black)
-                                    
                                         .accessibilityHidden(true)
                                     
                                     Spacer()
@@ -111,19 +108,21 @@ struct ContentView: View {
                                     
                                     Text("\(self.weatherVM.formatDouble(temp: forecast.day.avgtemp_c!))°C")
                                         .bold()
-                                    
+
                                         .accessibilityHidden(true)
+            
                                 }
                             }
                             
                         }
                     }
                     
+                    
                     .accessibilityLabel(Text("\(forecast.day.condition.text ?? "") in \(self.weatherVM.city) on \(self.weatherVM.dateFormatterFull(timeStamp: forecast.date_epoch!)), with an average temperature of \(self.weatherVM.formatDouble(temp: forecast.day.avgtemp_c!))°C"))
                     
                     .padding(.vertical, 10)
                 }
-                .navigationBarTitle("\(weatherVM.city) 7-Day Forecast", displayMode: .inline)
+                .navigationBarTitle("\(weatherVM.city) \(Constants.forecastDays)-Day Forecast", displayMode: .inline)
             }
             
         }
